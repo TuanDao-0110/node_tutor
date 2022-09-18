@@ -1,0 +1,18 @@
+// Modules
+// now we start to take value from global module
+const names = require('./4-names')
+console.log(names)
+// use destruction method to take value from module 
+const { john, pete } = names
+// import sayHi function 
+const sayHi = require("./5-ultis")
+// import 6 alternative
+const data = require('./6-alternative')
+// import 7 genrade
+
+require('./7-mind-grenade')
+// and now start to use it
+sayHi('susan')
+sayHi(john)
+sayHi(pete)
+// what is share in minumun
