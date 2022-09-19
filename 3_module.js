@@ -6,13 +6,12 @@ console.log(names)
 const { john, pete } = names
 // import sayHi function 
 const sayHi = require("./5-ultis")
-// import 6 alternative
+// import 6 alternative 
 const data = require('./6-alternative')
 // import 7 genrade
-
-require('./7-mind-grenade')
+const run = require('./7-mind-grenade')
 // and now start to use it
 sayHi('susan')
-sayHi(john)
 sayHi(pete)
-// what is share in minumun
+sayHi(john)
+
