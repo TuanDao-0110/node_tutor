@@ -1,1 +1,1 @@
-new data use write file : 
+data new is : first textadd some thing more second text txt
