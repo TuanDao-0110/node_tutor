@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TuanDao-0110/node_learn.git"
+    "url": "git+https://github.com/TuanDao-0110/node_tutorial.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TuanDao-0110/node_learn/issues"
+    "url": "https://github.com/TuanDao-0110/node_tutorial/issues"
   },
-  "homepage": "https://github.com/TuanDao-0110/node_learn#readme",
+  "homepage": "https://github.com/TuanDao-0110/node_tutorial#readme",
   "dependencies": {
     "bootstrap": "^5.2.1",
     "lodash": "^4.17.21"
