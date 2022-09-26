@@ -1,4 +1,4 @@
 # dependencies
 /node_modules
 .app.js
-/text.txt
+# /text.txt
