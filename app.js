@@ -1,8 +1,11 @@
 
 const {createReadStream} =require('fs')
-const stream = createReadStream('./content/big.txt')
+const stream = createReadStream('./content/big.txt',{encoding:'utf-8'}|| {highWaterMark: 9})
 stream.on('data',(result)=> { 
-    console.log(result)
+    console.log(
+        'chunk of data : ' +
+        result.length + ' is data length by bytes of data')
+        console.log('data is : ' + result)
 
 })
 // var http = require('http');
