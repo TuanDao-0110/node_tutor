@@ -1,5 +1,6 @@
 const http = require('http')
 // 1. use http module to and create a server.
+// call back function will be invoke every thing when someone call back our server 
 const server = http.createServer((req, res) => {
     // req = request
     // res =result

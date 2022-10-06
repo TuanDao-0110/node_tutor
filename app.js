@@ -1,42 +1,27 @@
-const { readFile, writeFile } = require('fs').promises
-// const util = require('util')
-// const readFilePromise = util.promisify(readFile)
-// const writeFilePromise = util.promisify(writeFile)
 
 
-const start = async () => {
-    try {
-        const result = await readFile('./content/first.txt', 'utf-8')
-        const result_2 = await readFile('./content/first.txt', 'utf-8')
-        await writeFile('./content/result-mind-grenade.txt', `this is done by 2 result :${result} ${result_2} `,
-         { flag: 'a' })
-        console.log(result)
-        console.log('second result :' + result_2)
+// })
+// var http = require('http');
+// var fs = require('fs');
 
-    } catch (error) {
-        console.log(error)
-    }
+// http.createServer(function (req, res) {
+//     // The filename is simple the local directory and tacks on the requested url
+//     var filename ='./content/big.txt';
 
-}
-start()
-// const getText = (path) => {
-//     return new Promise((res, rej) => {
+//     // This line opens the file as a readable stream
+//     var readStream = fs.createReadStream(filename);
 
-//         readFile(path, 'utf-8', (err, data) => {
-//             if (err) {
-//                 rej('err')
-//                 console.log('error')
-//                 return
-//             }
-//             else {
-//                 res('data')
-//                 console.log(data)
-//             }
-//         })
-//     })
-// }
+//     // This will wait until we know the readable stream is actually valid before piping
+//     readStream.on('open', function () {
+//         // This just pipes the read stream to the response object (which goes to the client)
+//         readStream.pipe(res);
+//     });
 
 
-
-
-
+//     // This catches any errors that happen while creating the readable stream (usually invalid names)
+//     readStream.on('error', function (err) {
+//         res.end(err);
+//     });
+// }).listen(8080,()=>{
+//     console.log('server on local host 8080')
+// });
