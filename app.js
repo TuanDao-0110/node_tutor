@@ -1,11 +1,11 @@
 
-const {createReadStream} =require('fs')
-const stream = createReadStream('./content/big.txt',{encoding:'utf-8'}|| {highWaterMark: 9})
-stream.on('data',(result)=> { 
-    console.log(
-        'chunk of data : ' +
-        result.length + ' is data length by bytes of data')
-        console.log('data is : ' + result)
+const { createReadStream } = require('fs')
+const readStream = createReadStream('./content/big.txt',)
+readStream.on('data', (result) => {
+    // console.log(
+    //     'chunk of data : ' +
+    //     result.length + ' is data length by bytes of data')
+    console.log('data is : ' + result)
 
 })
 // var http = require('http');
@@ -28,6 +28,6 @@ stream.on('data',(result)=> {
 //     readStream.on('error', function (err) {
 //         res.end(err);
 //     });
-// }).listen(8080,()=>{ 
+// }).listen(8080,()=>{
 //     console.log('server on local host 8080')
 // });
