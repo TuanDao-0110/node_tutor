@@ -1,11 +1,14 @@
 const { createReadStream } = require('fs')
-const readStream = createReadStream('./content/big.txt',)
+const readStream = createReadStream('./content/big.txt', { encoding: 'utf-8' })
 readStream.on('data', (result) => {
     // console.log(
     //     'chunk of data : ' +
     //     result.length + ' is data length by bytes of data')
     console.log('data is : ' + result)
 
+})
+readStream.on('error', (err) => {
+    console.log('error : ' + err)
 })
 // var http = require('http');
 // var fs = require('fs');
