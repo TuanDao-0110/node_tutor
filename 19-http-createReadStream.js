@@ -16,6 +16,6 @@ http.createServer((request, result) => {
     textStream.on('error', (er) => {
         console.log(er)
     })
-}).listen(5000, () => {
-    console.log('listen server 5000')
+}).listen(4000, () => {
+    console.log('listen server 4000')
 })
