@@ -15,18 +15,11 @@ app.get('/api/products', (req, res) => {
     res.status(200).json(newProduct)
 })
 
-app.get('/api/products/:productID', (req, res) => {
-    // console.log(req)
-    console.log(req.params)
-    // const singleProduct = products.find(item => item.id === 1)
-    // res.status(200).json(singleProduct)
-    const singleProduct = products.find(item => item.id.toString() === req.params.productID)
-    singleProduct ?
-        res.status(200).json(singleProduct) : res.status(400).end('Product not found')
+app.get('/api/products/1', (req, res) => {
+    const singleProduct = products.find(item => item.id === 1)
+    res.status(200).json(singleProduct)
 })
-app.all('*', (req, res) => {
-    res.status(400).end('<h1>Resource not found</h1>')
-})
+
 app.listen(4000, () => {
     console.log('server is listening on port 4000....')
 })
