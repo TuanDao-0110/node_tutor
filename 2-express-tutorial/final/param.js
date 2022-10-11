@@ -1,3 +1,4 @@
+
 const { response } = require('express')
 const express = require('express')
 const app = express()
@@ -25,7 +26,7 @@ app.get('/api/products/:productID', (req, res) => {
     singleProduct ?
         res.status(200).json(singleProduct) : res.status(404).json('Product not found')
 })
-app.get('/api/products/:productID/reviews/:reviewID',(req,res)=> { 
+app.get('/api/products/:productID/reviews/:reviewID', (req, res) => {
     console.log(req.params)
     res.end('review')
 })
