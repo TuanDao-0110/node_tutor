@@ -4,12 +4,15 @@ const path = require('path')
 const app = express()
 
 // use to fix path problem with some extenal static file will now public to file public
+// setup static adnd middleware
 app.use(express.static('./public'))
 
 
-app.get('/', (req, res) => {
-    res.status(200).sendFile(path.resolve(__dirname, './public/index.html'))
-})
+// app.get('/', (req, res) => {
+    // res.status(200).sendFile(path.resolve(__dirname, './public/index.html'))
+    // adding to statuc assests
+    // SSR
+// })
 
 
 app.all('*', (req, res) => {
