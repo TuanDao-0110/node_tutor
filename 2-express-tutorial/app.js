@@ -1,38 +1,21 @@
-// const express = require('express')
-// const app = express()
+const express = require('express')
+const path = require('path')
 
-// or we can write like this
-const app = require('express')()
+const app = express()
 
-
-// app.get
-// app.post
-// app.put
-// app.delete
-// app.all
-// app.use
-// app.listen
+// use to fix path problem with some extenal static file will now public to file public
+app.use(express.static('./public'))
 
 
-
-//1.  so 'get' is known as request on createsever on http ==> 
-// when browser request url ==> link that we can return some value
-app.get('/',(req,res)=> { 
-    // when user get address '/' ==> res will execute send ==> send something to browser
-    res.send('Home page')
-})
-
-app.get('/about',(req,res)=> { 
-    res.end('About page')
-})
-// 2. all method: ==> is equal to request.url which link can not define on createServer
-app.all('*',(req,res)=> { 
-    res.end('<h1>resource can not found</h1>')
+app.get('/', (req, res) => {
+    res.status(200).sendFile(path.resolve(__dirname, './public/index.html'))
 })
 
 
-//  CREATE LISTING SERVER
-app.listen(4000,()=> { 
-    console.log('listenning on port 4000')
+app.all('*', (req, res) => {
+    res.status(400).send('resource not found')
 })
 
+app.listen(4000, () => {
+    console.log('listening port on 4000')
+})
