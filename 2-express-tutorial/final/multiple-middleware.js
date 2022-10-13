@@ -33,6 +33,14 @@ app.get('/api/items', (req, res) => {
     console.log(req.user)
     res.send('items')
 })
+
+
+// In case we only want to apply middleware for one single request ==> we can write like this
+
+// app.get('/api/items', [authorize, logger], (req, res) => {
+//     console.log(req.user)
+//     res.send('items')
+// })
 app.get('*', (req, res) => {
     console.log(req.user)
     res.status(404).send('data not found')

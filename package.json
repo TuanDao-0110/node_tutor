@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app"
-  }, 
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TuanDao-0110/node_tutorial.git"
@@ -20,7 +20,8 @@
   "homepage": "https://github.com/TuanDao-0110/node_tutorial#readme",
   "dependencies": {
     "bootstrap": "^5.2.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
