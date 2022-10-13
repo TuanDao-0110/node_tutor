@@ -1,5 +1,5 @@
 const { createReadStream } = require('fs')
-const readStream = createReadStream('./content/big.txt', { encoding: 'utf-8' })
+const readStream = createReadStream('./content/big.txt', { encoding: '' })
 readStream.on('data', (result) => {
     // console.log(
     //     'chunk of data : ' +

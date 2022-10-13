@@ -1,1 +1,1 @@
-data new is : first textadd some thing more second text txt
+here is result ::first textadd some thing more + second : second text txt flag is a

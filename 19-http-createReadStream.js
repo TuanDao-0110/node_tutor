@@ -1,5 +1,5 @@
 const http = require('http')
-const { createReadStream, readFileSync, } = require("fs")
+const { createReadStream, } = require("fs")
 http.createServer((request, result) => {
     // const text = readFileSync('./content/big.txt','utf-8',()=> { 
 
