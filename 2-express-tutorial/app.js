@@ -1,43 +1,23 @@
 const express = require('express')
+
 const app = express()
-const morgan = require('morgan')
-const logger = require('./logger')
-const authorize = require('./authorize')
+const { people } = require('./data')
+
+const host = 'localhost'
+const port = '4000'
 
 
-
-// 3. set up with authorize  vs logger
-
-// app.use([morgan('tiny'),authorize,logger])
-
-app.use('/about',morgan('tiny'))
-app.use(express.static('./public'))
-
-app.get('/', (req, res) => {
-    res.status(200).sendFile(path.resolve(__dirname, './public/index.html'))
+// 1-get method
+app.get('/api/people', (req, res) => {
+    res.status(200).json({ success: true, data: people })
 })
 
-// app.get('/',(req,res)=> { 
-//     res.send('Home')
-// })
+// 2- POST method
+app.post('/')
 
-app.get('/about', (req, res) => {
-
-    res.send('About')
+app.get('*', (req, res) => {
+    res.status(404).send('data not found˝')
 })
-
-app.get('/api/products',(req,res)=> { 
-    res.send('Product')
-})
-
-app.get('/api/items',(req, res) => {
-    console.log(req.user)
-    res.send('items')
-})
-app.get('*',(req,res)=> { 
-    console.log(req.user)
-    res.status(404).send('data not found')
-})
-app.listen(4000,()=> { 
-    console.log("listening on port 4000 ....")
+app.listen(port, host, () => {
+    console.log(host + port + '  ' + 'running ....')
 })

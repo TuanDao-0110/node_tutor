@@ -7,7 +7,8 @@ http.createServer((request, result) => {
     // result.end(text)
     const textStream = createReadStream('./content/big.txt', 'utf-8')
     if (request.url == '/') {
-        textStream.on('open', () => {
+        textStream.on('open', (chunk) => {
+            
             // textStream.pipe() ==> is have to write data in chunk ==>  
             // now ==> response object can be set up in rewritable stream
             textStream.pipe(result)

@@ -10,8 +10,8 @@ const authorize = require('./authorize')
 
 // app.use([morgan('tiny'),authorize,logger])
 
-app.use(morgan('tiny'))
-app.use(express.static('../public'))
+// app.use('/about',morgan('tiny'))
+app.use([express.static('./public'), morgan('tiny')])
 
 app.get('/', (req, res) => {
     res.status(200).sendFile(path.resolve(__dirname, './public/index.html'))
