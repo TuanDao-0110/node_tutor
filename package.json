@@ -20,6 +20,7 @@
   "homepage": "https://github.com/TuanDao-0110/node_tutorial#readme",
   "dependencies": {
     "bootstrap": "^5.2.1",
+    "dotenv": "^16.0.3",
     "lodash": "^4.17.21",
     "mongoose": "^6.6.5",
     "morgan": "^1.10.0"
