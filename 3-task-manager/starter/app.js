@@ -5,7 +5,7 @@ const app = express()
 // 3. path module for index file 
 const path = require('path')
 // 4. import connect function to MONGDB vs take our env file 
-const connectDB = require('../db/connect')
+const connectDB = require('./db/connect')
 // --> this code will auto load .env file and initialize the values
 require('dotenv').config()
 //5. router http request : api/v1/task
