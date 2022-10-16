@@ -10,17 +10,12 @@ const createTask = async (req, res) => {
         const task = await Task.create(data)
         res.status(200).json(task)
     } catch (error) {
-        res.status(404).send(error)
+        res.status(404).send(error.message)
     }
-
 }
-
-
 const updateTask = (req, res) => {
     res.status(200).send('update task')
 }
-
-
 const deleteTask = (req, res) => {
     res.status(200).send('delete task')
 }
