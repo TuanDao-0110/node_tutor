@@ -1,8 +1,17 @@
+// 1. Import mongoose model.
 const Task = require('../model/task')
-
-const getAllTask = (req, res) => {
-    res.status(200).send('allItem')
+// 2. get all the task 
+const getAllTask = async (req, res) => {
+    try {
+        const tasks = await Task.find({})
+        res.status(200).json({ tasks })
+    } catch (error) {
+        res.status(500).json(error)
+    }
 }
+
+
+// 3. create data task
 
 const createTask = async (req, res) => {
     let data = req.body
@@ -13,16 +22,40 @@ const createTask = async (req, res) => {
         res.status(500).send(error.message)
     }
 }
-const updateTask = (req, res) => {
-    res.status(200).send('update task')
+
+// 4. update task 
+
+const updateTask = async (req, res) => {
+    let {id} = req.params
+    let taskEdit = req.body
+    try {
+        const updateTask = await Task.findByIdAndUpdate(id, taskEdit)
+        res.status(200).json(taskEdit)
+    } catch (error) {
+        res.status(500).json(error)
+    }
 }
-const deleteTask = (req, res) => {
-    res.status(200).send('delete task')
+// 5. deleteTask
+const deleteTask = async (req, res) => {
+    let {id} = req.params
+    try {
+        const deleteTask = await Task.findByIdAndRemove(id)
+        res.status(200).json(deleteTask)
+    } catch (error) {
+        res.status(500).json(error)
+    }
 }
 
-const getTask = (req, res) => {
-    console.log(req.params)
-    res.status(200).send('get task id')
+// 6. get task
+const getTask = async (req, res) => {
+    let {id} = req.params
+    console.log(id)
+    try {
+        const getTaskID = await Task.findById(id)
+        res.status(200).json(getTaskID)
+    } catch (error) {
+        res.status(500).json(error)
+    }
 
 }
-module.exports = { getAllTask, createTask, updateTask, deleteTask, getTask, Task }
+module.exports = { getAllTask, createTask, updateTask, deleteTask, getTask, }

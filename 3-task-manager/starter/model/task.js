@@ -9,10 +9,9 @@ const taskSchema = new mongoose.Schema({
     // data validation
     name: {
         type: String,
-        // required: [true, 'must provide name'],
-        // trim: true,
-        // maxlength: [20, 'name can not be more than 20 character']
-        default: "no name",
+        required: [true, 'must provide name'],
+        trim: true,
+        maxlength: [20, 'name can not be more than 20 character']
     },
     completed: {
         type: Boolean,
@@ -20,7 +19,8 @@ const taskSchema = new mongoose.Schema({
     },
 
 })
-// 2. export chrema model vs naming it  
+// 2. export chema model vs naming it  
+// ===> this model is only with with databse 03-Task-MANAGER vs chema name: Task
 
 module.exports = mongoose.model('Task', taskSchema)
 // module.exports = mongoose.model('data', dataSchema)
