@@ -9,14 +9,16 @@ const taskSchema = new mongoose.Schema({
     // data validation
     name: {
         type: String,
-        required: [true, 'must provide name'],
-        trim: true,
-        maxlength: [20, 'name can not be more than 20 character']
+        // required: [true, 'must provide name'],
+        // trim: true,
+        // maxlength: [20, 'name can not be more than 20 character']
+        default: "no name",
     },
     completed: {
         type: Boolean,
-        default: true
+        default: true,
     },
+
 })
 // 2. export chrema model vs naming it  
 
