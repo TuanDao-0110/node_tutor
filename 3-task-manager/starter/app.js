@@ -1,6 +1,9 @@
+require('../db/connect')
 const express = require('express')
 const app = express()
 const path = require('path')
+
+
 
 
 const tasks = require('./routes/tasks')
@@ -16,7 +19,7 @@ app.use(express.json())
 
 app.get('/hello', (req, res) => {
     // res.status(200).send('hello')
-res.status(200).sendFile(path.resolve(__dirname,'./public/task.html'))
+    res.status(200).sendFile(path.resolve(__dirname, './public/task.html'))
 })
 
 // router method with https request : '/api/v1/tasks'
