@@ -11,7 +11,7 @@ const connectDB = (url) => {
             // userNewUrlParser: true,
             dbName: '03-TASK-USER',
             // userFindAndModify: false,
-            userUnifiedTopology: true,
+            useUnifiedTopology: true 
         })
 }
 

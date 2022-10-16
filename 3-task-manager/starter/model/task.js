@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const taskSchema = new mongoose.Schema({
     // only this data's style will be send to data base
     // name: String, completed: Boolean
-     
+
     // data validation
     name: {
         type: String,
@@ -15,7 +15,7 @@ const taskSchema = new mongoose.Schema({
     },
     completed: {
         type: Boolean,
-        default: false,
+        default: true
     },
 })
 // 2. export chrema model vs naming it  
