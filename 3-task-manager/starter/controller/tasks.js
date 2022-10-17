@@ -5,6 +5,8 @@ const getAllTask = async (req, res) => {
     try {
         const tasks = await Task.find({})
         res.status(200).json({ tasks })
+        // 1 this way likely recommend
+        // res.status(200).json({status:'success',data: {tasks,nbHits:tasks.length}})
     } catch (error) {
         res.status(500).json({ msg: error })
     }
@@ -27,10 +29,34 @@ const createTask = async (req, res) => {
 // 4. update task 
 
 const updateTask = async (req, res) => {
-    let { id } = req.params
+    let { id: taskID } = req.params
     let taskEdit = req.body
     try {
-        const task = await Task.findByIdAndUpdate(id, taskEdit)
+        const task = await Task.findByIdAndUpdate(taskID, taskEdit)
+        if (!task) {
+            return res.status(404).json({ msg: `no task with id : ${taskID}` })
+        }
+        res.status(200).json({ task })
+    } catch (error) {
+        res.status(500).json({ msg: error })
+
+    }
+}
+
+// 4.1 editask
+
+const editTask = async (req, res) => {
+    let { id: taskID } = req.params
+    let taskEdit = req.body
+    try {
+        const task = await Task.findByIdAndUpdate(taskID, taskEdit, {
+            new: true,
+            runValidators: true,
+            overwrite: true,
+        })
+        if (!task) {
+            return res.status(404).json({ msg: `no task with id : ${taskID}` })
+        }
         res.status(200).json({ task })
     } catch (error) {
         res.status(500).json({ msg: error })
@@ -57,17 +83,17 @@ const getTask = async (req, res) => {
     try {
         // const getTaskID = await Task.findById(id)
         // we can write 
-        const getTaskID = await Task.findOne({ _id: taskID })
-        if (!getTaskID) {
+        const task = await Task.findOne({ _id: taskID })
+        if (!task) {
             return res.status(404).json({ msg: `no task with id : ${taskID}` })
         }
         // 1 the way we write {getTaskID} ==> that mean we return an object that 
         // have key name: 'getTaskID' vs 
         // vs it value : will be getTaskID's value
-        res.status(200).json({"task":getTaskID })
+        res.status(200).json({ task })
     } catch (error) {
         res.status(500).json({ msg: error })
     }
 
 }
-module.exports = { getAllTask, createTask, updateTask, deleteTask, getTask, }
+module.exports = { getAllTask, createTask, updateTask, deleteTask, getTask, editTask }
