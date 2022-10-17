@@ -4,6 +4,9 @@ const Task = require('../model/task')
 const asyncWrapper = require('../middleware/async')
 
 
+// 1.1 import API ERROR 
+const { createCustomeError, CustomAPIError } = require('../errors/custom-error')
+
 // 2. get all the task 
 const getAllTask = asyncWrapper(async (req, res) => {
 
@@ -26,12 +29,12 @@ const createTask = asyncWrapper(async (req, res) => {
 )
 // 4. update task 
 
-const updateTask = asyncWrapper(async (req, res) => {
+const updateTask = asyncWrapper(async (req, res, next) => {
     let { id: taskID } = req.params
     let taskEdit = req.body
     const task = await Task.findByIdAndUpdate(taskID, taskEdit)
     if (!task) {
-        return res.status(404).json({ msg: `no task with id : ${taskID}` })
+        return next(createCustomeError('no task id is :', 404))
     }
     res.status(200).json({ task })
 
@@ -48,9 +51,8 @@ const editTask = asyncWrapper(async (req, res, next) => {
         overwrite: true,
     })
     if (!task) {
-        const error = new Error(`no task with id : ${taskID}`)
-        error.status = 404;
-        next(error)
+        return next(createCustomeError('no task id is :', 404))
+
     }
     res.status(200).json({ task })
 })
@@ -63,7 +65,7 @@ const deleteTask = asyncWrapper(async (req, res) => {
 })
 
 // 6. get task
-const getTask = asyncWrapper(async (req, res, next) => {
+const getTask = asyncWrapper(async (req, res,next) => {
     // this how we destructive a value from object and also can named it
     // by name that is taskID vs it's value is detructive in req.params
     let { id: taskID } = req.params
@@ -74,11 +76,11 @@ const getTask = asyncWrapper(async (req, res, next) => {
     // built-in error handler that takes care of any errors that might be encountered in the app.
     // this is how we wanna set own error for this method. 
     if (!task) {
-        const err = new Error('not found')
-        err.status = 404
-        return next(err)
+        return next(createCustomeError('no task id is :', 404))
+
         // return res.status(404).json({ msg: `no task with id : ${taskID}` })
     }
+
     // 1 the way we write {getTaskID} ==> that mean we return an object that 
     // have key name: 'getTaskID' vs 
     // vs it value : will be getTaskID's value

@@ -4,6 +4,7 @@ const asyncWrapper = (fn) => {
         try {
             await fn(req, res, next)
         } catch (error) {
+            console.log('go to general error')
         //    1 . this gonne go to next middleware ==> that will handle the error
         // 2. so in this case we will set up middleware ==> that will handle all the error
         // 3. the most popular is The default error handler on express.js

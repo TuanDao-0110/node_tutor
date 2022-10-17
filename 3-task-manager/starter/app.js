@@ -31,7 +31,7 @@ app.get('/edit-task', (req, res) => {
 //10. router method with https request : '/api/v1/tasks'
 
 app.use('/api/v1/tasks', tasks)
-app.use('/api/v1/tasks/:id',errorHandlerMiddleware)
+app.use(errorHandlerMiddleware)
 // 12. handle 404
 app.use(notFound)
 // 11. create async vs await function ==> try/catch mongoBD connection
