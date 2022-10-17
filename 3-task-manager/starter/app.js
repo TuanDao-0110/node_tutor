@@ -14,14 +14,14 @@ const tasks = require('./routes/tasks')
 // 6. host vs port 
 const host = 'localhost'
 const port = 3000
-
+const {errorHandlerMiddleware} = require("./middleware/error")
 // 7. create static for index file ==> help to connect with css/js file 
 app.use(express.static('./public'))
 
 
 //8. middleware to make sure when we get data by post method ==> we can have json file
 app.use(express.json())
-
+// 
 
 //9. routes: 
 
@@ -31,6 +31,7 @@ app.get('/edit-task', (req, res) => {
 //10. router method with https request : '/api/v1/tasks'
 
 app.use('/api/v1/tasks', tasks)
+app.use('/api/v1/tasks/:id',errorHandlerMiddleware)
 // 12. handle 404
 app.use(notFound)
 // 11. create async vs await function ==> try/catch mongoBD connection
