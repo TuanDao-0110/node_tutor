@@ -30,8 +30,8 @@ const updateTask = async (req, res) => {
     let { id } = req.params
     let taskEdit = req.body
     try {
-        const updateTask = await Task.findByIdAndUpdate(id, taskEdit)
-        res.status(200).json({ taskEdit })
+        const task = await Task.findByIdAndUpdate(id, taskEdit)
+        res.status(200).json({ task })
     } catch (error) {
         res.status(500).json({ msg: error })
 
@@ -64,7 +64,7 @@ const getTask = async (req, res) => {
         // 1 the way we write {getTaskID} ==> that mean we return an object that 
         // have key name: 'getTaskID' vs 
         // vs it value : will be getTaskID's value
-        res.status(200).json({ getTaskID, taskID })
+        res.status(200).json({"task":getTaskID })
     } catch (error) {
         res.status(500).json({ msg: error })
     }
