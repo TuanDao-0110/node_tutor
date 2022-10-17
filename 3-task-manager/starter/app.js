@@ -5,16 +5,16 @@ const app = express()
 // 3. path module for index file 
 const path = require('path')
 // 4. import connect function to MONGDB vs take our env file 
-const connectDB = require('./db/connect') 
+const connectDB = require('./db/connect')
 // --> this code will auto load .env file and initialize the values
 require('dotenv').config()
-const notFound =require('./middleware/not-found')
+const notFound = require('./middleware/not-found')
 //5. router http request : api/v1/task
 const tasks = require('./routes/tasks')
 // 6. host vs port 
 const host = 'localhost'
-const port = 3000
-const {errorHandlerMiddleware} = require("./middleware/error")
+const port = process.env.PORT || 3000
+const { errorHandlerMiddleware } = require("./middleware/error")
 // 7. create static for index file ==> help to connect with css/js file 
 app.use(express.static('./public'))
 
