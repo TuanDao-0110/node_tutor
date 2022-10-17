@@ -24,9 +24,11 @@ app.use(express.json())
 
 //9. routes: 
 
-app.get('/hello', (req, res) => {
+app.get('/edit-task', (req, res) => {
     res.status(200).sendFile(path.resolve(__dirname, './public/task.html'))
 })
+
+
 
 //10. router method with https request : '/api/v1/tasks'
 

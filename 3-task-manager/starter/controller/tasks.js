@@ -6,7 +6,7 @@ const getAllTask = async (req, res) => {
         const tasks = await Task.find({})
         res.status(200).json({ tasks })
     } catch (error) {
-        res.status(500).json(error)
+        res.status(500).json({ msg: error })
     }
 }
 
@@ -19,42 +19,54 @@ const createTask = async (req, res) => {
         const task = await Task.create(data)
         res.status(200).json({ task })
     } catch (error) {
-        res.status(500).send(error.message)
+        res.status(500).json({ msg: error })
+
     }
 }
 
 // 4. update task 
 
 const updateTask = async (req, res) => {
-    let {id} = req.params
+    let { id } = req.params
     let taskEdit = req.body
     try {
         const updateTask = await Task.findByIdAndUpdate(id, taskEdit)
-        res.status(200).json(taskEdit)
+        res.status(200).json({ taskEdit })
     } catch (error) {
-        res.status(500).json(error)
+        res.status(500).json({ msg: error })
+
     }
 }
 // 5. deleteTask
 const deleteTask = async (req, res) => {
-    let {id} = req.params
+    let { id } = req.params
     try {
         const deleteTask = await Task.findByIdAndRemove(id)
-        res.status(200).json(deleteTask)
+        res.status(200).json({ deleteTask })
     } catch (error) {
-        res.status(500).json(error)
+        res.status(500).json({ msg: error })
+
     }
 }
 
 // 6. get task
 const getTask = async (req, res) => {
-    let {id} = req.params
-    console.log(id)
+    // this how we destructive a value from object and also can named it
+    // by name that is taskID vs it's value is detructive in req.params
+    let { id: taskID } = req.params
     try {
-        const getTaskID = await Task.findById(id)
-        res.status(200).json(getTaskID)
+        // const getTaskID = await Task.findById(id)
+        // we can write 
+        const getTaskID = await Task.findOne({ _id: taskID })
+        if (!getTaskID) {
+            return res.status(404).json({ msg: `no task with id : ${taskID}` })
+        }
+        // 1 the way we write {getTaskID} ==> that mean we return an object that 
+        // have key name: 'getTaskID' vs 
+        // vs it value : will be getTaskID's value
+        res.status(200).json({ getTaskID, taskID })
     } catch (error) {
-        res.status(500).json(error)
+        res.status(500).json({ msg: error })
     }
 
 }
