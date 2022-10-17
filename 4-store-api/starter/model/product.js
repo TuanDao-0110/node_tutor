@@ -25,8 +25,9 @@ const productSchema = new mongoose.Schema({
     }, company: {
         type: String,
         enum: {
-
-            values: ['ikdea', 'liddy', 'caressa', 'marcos'],
+// 1. this is arrange of values can be picked ==> if the company name we insert !== this arr
+// 2. new model data will not be sent
+            values: ['ikea', 'liddy', 'caressa', 'marcos'],
             message: '{VALUE} is not supported'
         }
     }
