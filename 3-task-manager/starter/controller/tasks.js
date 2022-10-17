@@ -1,54 +1,47 @@
 // 1. Import mongoose model.
 const Task = require('../model/task')
+
+const asyncWrapper =require('../middleware/async')
+
+
 // 2. get all the task 
-const getAllTask = async (req, res) => {
-    try {
+const getAllTask =asyncWrapper(  async (req, res) => {
+    
         const tasks = await Task.find({})
         res.status(200).json({ tasks })
         // 1 this way likely recommend
         // res.status(200).json({status:'success',data: {tasks,nbHits:tasks.length}})
-    } catch (error) {
-        res.status(500).json({ msg: error })
-    }
-}
+})
 
 
 // 3. create data task
 
-const createTask = async (req, res) => {
+const createTask =asyncWrapper( async (req, res) => {
     let data = req.body
-    try {
+   
         const task = await Task.create(data)
         res.status(200).json({ task })
-    } catch (error) {
-        res.status(500).json({ msg: error })
 
-    }
 }
-
+)
 // 4. update task 
 
-const updateTask = async (req, res) => {
+const updateTask =asyncWrapper( async (req, res) => {
     let { id: taskID } = req.params
     let taskEdit = req.body
-    try {
         const task = await Task.findByIdAndUpdate(taskID, taskEdit)
         if (!task) {
             return res.status(404).json({ msg: `no task with id : ${taskID}` })
         }
         res.status(200).json({ task })
-    } catch (error) {
-        res.status(500).json({ msg: error })
 
-    }
-}
+})
 
 // 4.1 editask
 
-const editTask = async (req, res) => {
+const editTask =asyncWrapper( async (req, res) => {
     let { id: taskID } = req.params
     let taskEdit = req.body
-    try {
         const task = await Task.findByIdAndUpdate(taskID, taskEdit, {
             new: true,
             runValidators: true,
@@ -58,22 +51,14 @@ const editTask = async (req, res) => {
             return res.status(404).json({ msg: `no task with id : ${taskID}` })
         }
         res.status(200).json({ task })
-    } catch (error) {
-        res.status(500).json({ msg: error })
-
-    }
-}
+})
 // 5. deleteTask
-const deleteTask = async (req, res) => {
+const deleteTask =asyncWrapper( async (req, res) => {
     let { id } = req.params
-    try {
         const deleteTask = await Task.findByIdAndRemove(id)
         res.status(200).json({ deleteTask })
-    } catch (error) {
-        res.status(500).json({ msg: error })
-
-    }
-}
+   
+})
 
 // 6. get task
 const getTask = async (req, res) => {

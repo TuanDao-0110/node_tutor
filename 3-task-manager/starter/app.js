@@ -8,6 +8,7 @@ const path = require('path')
 const connectDB = require('./db/connect') 
 // --> this code will auto load .env file and initialize the values
 require('dotenv').config()
+const notFound =require('./middleware/not-found')
 //5. router http request : api/v1/task
 const tasks = require('./routes/tasks')
 // 6. host vs port 
@@ -27,13 +28,11 @@ app.use(express.json())
 app.get('/edit-task', (req, res) => {
     res.status(200).sendFile(path.resolve(__dirname, './public/task.html'))
 })
-
-
-
 //10. router method with https request : '/api/v1/tasks'
 
 app.use('/api/v1/tasks', tasks)
-
+// 12. handle 404
+app.use(notFound)
 // 11. create async vs await function ==> try/catch mongoBD connection
 const start = async () => {
     try {
