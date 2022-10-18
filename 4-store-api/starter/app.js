@@ -29,8 +29,9 @@ app.get('/', (req, res) => {
 app.use('/api/v1/products',productRouter)
 
 // products route when get error
-
+// 1 handle  after router when can not get infor from server
 app.use(errorHandlerMiddleware)
+// 2 handle before the router 
 app.use(notFoundMiddleware)
 
 // create port 

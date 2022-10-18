@@ -4,9 +4,12 @@ const Product = require('../model/product')
 
 const getAllProductStatic = async (req, res) => {
 
-    const products = await Product.find()
+    const products = await Product.find({
+        // nbHits: products.length,
+    })
 
-    // throw new Error('testing async errors')
+    console.log(products)
+   // throw new Error('testing async errors')
     res.status(200).json({ products })
 }
 
