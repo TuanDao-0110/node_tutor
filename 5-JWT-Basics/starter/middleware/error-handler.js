@@ -1,12 +1,10 @@
-const customAPIErr = require('../errors/custom-errors')
-
-
+const {CustomeAPIError,} = require('../errors')
+const {StatusCodes}= require('http-status-codes')
 const errorHandlerMiddleware = async (err, req, res, next) => {
-    console.log('default hanlder ' +err)
-    if (err instanceof customAPIErr) {
+    if (err instanceof CustomeAPIError) {
         return res.status(err.statusCode).json({ msg: err.message })
     }
-    return res.status(500).json({ msg: 'Wrong Server' })
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ msg: 'Wrong Server' })
 }
 
 
