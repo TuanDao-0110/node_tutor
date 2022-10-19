@@ -29,9 +29,13 @@ const login = async (req, res, next) => {
 }
 
 
-const dashBoard = async (req, res) => {
+const dashBoard = async (req, res, next) => {
+    console.log(req.user)
+    const { username, id } = req.user
     const luckyNum = Math.floor(Math.random() * 100)
-    res.status(200).json({ msg: `hello user`, secret: `here your number: ${luckyNum}` })
+
+    res.status(200).json({ msg: `hello user: ${username}`, secret: `here your number: ${luckyNum}` })
+
 }
 
 
