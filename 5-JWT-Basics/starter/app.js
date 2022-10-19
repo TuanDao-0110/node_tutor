@@ -17,7 +17,7 @@ const defautHandler = require('./middleware/error-handler')
 app.use(defautHandler)
 
 // set up port listener
-const starter = async () => {
+const start = async () => {
     try {
         app.listen(PORT, () => {
             console.log(`listening to port : ${PORT} ......`)
@@ -27,7 +27,7 @@ const starter = async () => {
     }
 }
 
-starter()
+start()
 
 
 
