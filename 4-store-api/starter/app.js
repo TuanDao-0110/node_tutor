@@ -21,8 +21,9 @@ const connectBD = require('./db/connect')
 
 const productRouter = require('./router/router')
 // root
+app.use(express.static('./'))
 app.get('/', (req, res) => {
-    res.send("<h1>Store API </h1> <a href='/api/v1/products'>product route</a>")
+    // res.send("<h1>Store API </h1> <a href='/api/v1/products'>product route</a>")
 })
 // setup router 
 

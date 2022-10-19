@@ -3,7 +3,7 @@ const Product = require('../model/product')
 const getAllProductStatic = async (req, res, next) => {
     const search = 'aa'
     const products = await Product.find({
-        price:{$gt:30}
+        price: { $gt: 30 }
         // name: "2",
         // using regex
         // name: { $regex: 'a', $options: 'i' }
@@ -12,8 +12,8 @@ const getAllProductStatic = async (req, res, next) => {
         // Perform Case- Insensitive Regular Expression Match.
         // there 
     }).select('name price')
-    // .limit(5)
-    .sort('price')
+        // .limit(5)
+        .sort('price')
     // .skip(5)
     res.status(200).json({ products, nbHits: products.length })
 
@@ -24,7 +24,7 @@ const getAllProductStatic = async (req, res, next) => {
 const getAllProduct = async (req, res) => {
     // console.log(req.query)
     // 1. get feature on query ==> to get value from database. 
-    const { featured, company, name, sort, limit, field, page } = req.query
+    const { featured, company, name, sort, limit, field, page, numericFilters } = req.query
     const queryObject = {}
     // 2 check query  
     if (featured) {
@@ -37,7 +37,7 @@ const getAllProduct = async (req, res) => {
         queryObject.name = { $regex: name, $options: 'i' }
     }
 
-    let result =Product.find({})
+    let result = Product.find({})
     // with our params with 2 parameter --> we can string it to " "
     if (sort) {
         const sortList = sort.split(',').join(' ')
@@ -50,6 +50,39 @@ const getAllProduct = async (req, res) => {
         const fieldsList = field.split(',').join(' ')
         console.log(fieldsList)
         result = result.select(fieldsList)
+    }
+    if (numericFilters) {
+        const operatorMap = {
+            '>': "$gt",
+            '>=': "$gte",
+            '=': "$eq",
+            '<': "$lt",
+            '<=': "$lte",
+        }
+        const regEx = /\b(<|>|>=|=|<=)\b/g
+        let filters = numericFilters.replace(regEx, (match) => `-${operatorMap[match]}-`)
+        // 1. when we have filer string now we devide into 2 part array.
+        const options = ['price', 'rating']
+
+        filters = filters.split(',').forEach((item) => {
+            // on the array ==> create new porperty to our queryObject that 
+            //  the  porperty object will be : ===> example:
+            //  price : { $gt : 40} or rating : { $gt : 22}
+            const [field, operator, value] = item.split('-')
+            if (options.includes(field)) {
+                queryObject[field] = {
+                    [operator]: Number(value),
+                }
+            }
+        })
+        if (queryObject[options[0]] && queryObject[options[1]]) {
+            console.log('this step')
+            result = Product.find({
+                [options[0]]: queryObject[options[0]],
+                [options[1]]: queryObject[options[1]] 
+            })
+
+        }
     }
     let tempPage = Number(page) || 1
     let temLimit = Number(limit) || 10
