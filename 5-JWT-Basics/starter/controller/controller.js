@@ -5,7 +5,8 @@
 const CustomeAPIError = require('../errors/custom-errors')
 const { use } = require('../routers/main')
 
-
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 const login = async (req, res, next) => {
     // mongo to check user or password
     const { username, password } = req.body
@@ -15,8 +16,14 @@ const login = async (req, res, next) => {
         // throw new Error('wrong', 400)
         next(new CustomeAPIError('please  provide user name', 400))
 
-    } else {
-        res.status(200).json({ msg: 'welcome user' })
+    }
+    else {
+        // now we create token with payload, 
+        const id = new Date().getDate()
+        const token = jwt.sign({
+            username, id
+        }, process.env.JWT_SECRET, { expiresIn: '30d' })
+        res.status(200).json({ msg: 'welcome come user ', token })
     }
 
 }
