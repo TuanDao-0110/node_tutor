@@ -2,6 +2,7 @@ const customAPIErr = require('../errors/custom-errors')
 
 
 const errorHandlerMiddleware = async (err, req, res, next) => {
+    console.log('default hanlder ' +err)
     if (err instanceof customAPIErr) {
         return res.status(err.statusCode).json({ msg: err.message })
     }

@@ -7,7 +7,6 @@ app.use(express.static('./public'))
 const PORT = process.env.PORT || 3000
 // setup router 
 
-
 const router = require('./routers/main')
 app.use('/api/v1', router)
 // check middleware wrong router
