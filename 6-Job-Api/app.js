@@ -24,12 +24,12 @@ app.get('/', (req, res) => {
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 
-
+const PORT = process.env.PORT || 3000
 const start = async () => {
-    
+
     try {
-        app.listen(process.env.PORT, () => {
-            console.log(`listening to the port ${process.env.PORT}......`)
+        app.listen(PORT, () => {
+            console.log(`listening to the port ${PORT}......`)
         })
     } catch (error) {
 
