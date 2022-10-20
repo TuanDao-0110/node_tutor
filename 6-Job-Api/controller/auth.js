@@ -15,11 +15,9 @@ const register = async (req, res, next) => {
     // create new temp object ==> by using bccryptjs
     try {
         const user = await User.create({ ...req.body })
-        const token = jwt.sign({
-            name: user?.name, userId: user?._id
-        }, 'fdosaif', { expiresIn: '40d' })
+
         // send data with token when register. 
-        res.status(StatusCodes.CREATED).json({ user: { name: user.getName() }, token })
+        res.status(StatusCodes.CREATED).json({ user: { name: user.name }, token: user.createJWT() })
 
     } catch (error) {
         // next(new Unauthentification('user exist'))
