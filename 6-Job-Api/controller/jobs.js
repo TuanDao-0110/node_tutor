@@ -26,10 +26,8 @@ const getJob = async (req, res, next) => {
     try {
         const job = await JobModel.findOne({ _id: jobId, createBy: userId })
         res.status(StatusCodes.OK).json({ job })
-
     } catch (error) {
-        next(new BadRequest('job description value wrong'))
-
+        next(error)
     }
 }
 const createJob = async (req, res, next) => {
@@ -66,7 +64,7 @@ const deleteJob = async (req, res, next) => {
     try {
         const job = await JobModel.findOneAndRemove(
             { _id: jobId, createBy: userId })
-        res.status(StatusCodes.OK).json({ msg:'job deleted ' })
+        res.status(StatusCodes.OK).json({ msg: 'job deleted ' })
 
     } catch (error) {
         next(new BadRequest('job not exist'))

@@ -6,8 +6,17 @@ const errorHandlerMiddleWare = (err, req, res, next) => {
         msg: err.message || 'something wrong try again later'
     }
     //handle when  
-
-// handle when email already exist
+    if (err.name === 'ValidationError') {
+        customError.msg = Object.values(err.errors).map((item) => {
+           return item.message
+        }).join(',')
+        customError.status = 400
+    }
+    if (err.name === 'CastError') { 
+        customError.msg=`No item found with id : ${err.value}`
+        customError.status = 404
+    }
+    // handle when email already exist
     if (err.code && err.code === 11000) {
         customError.msg = `Duplicate value enterer for ${Object.keys(err.keyValue)},please choose another value`
         customError.status = 400
