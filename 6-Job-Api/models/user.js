@@ -1,6 +1,6 @@
 const bccrypt = require('bcryptjs')
 
-const jwt =require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 // create user check Monoge
 
 const mongoose = require('mongoose')
@@ -36,9 +36,13 @@ userSchema.pre("save", async function (next) {
 })
 // create instance method to execute token ==> this function will be invoke after mongose send data 
 
-userSchema.methods.createJWT = function(){
-    
-    return jwt.sign({userId: this._id,name:this.name },'jwtSecret',{expiresIn:'30d'})
-}
+userSchema.methods.createJWT = function () {
 
+    return jwt.sign({ userId: this._id, name: this.name }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LIFETIME })
+}
+userSchema.methods.comparePassword = async function (candidatePassword) {
+    console.log('candidate,' + candidatePassword + '  ' + 'store password : ' + this.password)
+    const isMatch = await bccrypt.compare(candidatePassword, this.password)
+    return isMatch
+}
 module.exports = mongoose.model('User', userSchema)

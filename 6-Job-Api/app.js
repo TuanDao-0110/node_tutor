@@ -11,7 +11,7 @@ const jobRouter = require('./routers/job')
 
 const notFoundMiddleware = require('./middleware/root-found')
 const errorHandlerMiddleware = require('./middleware/errorhandler')
-
+const authentication = require('./middleware/authentification')
 app.use(express.json())
 
 // connectDB 
@@ -21,7 +21,8 @@ const connectDB = require('./db/connect')
 // routers
 
 app.use('/api/v1/auth', authRouter)
-app.use('/api/v1/jobs', jobRouter)
+// we use middleware before  we execute jobRouter ==> to make sure it good 
+app.use('/api/v1/jobs', authentication, jobRouter)
 
 
 app.use(notFoundMiddleware)
