@@ -1,3 +1,6 @@
+const bccrypt = require('bcryptjs')
+
+
 // create user check Monoge
 
 const mongoose = require('mongoose')
@@ -17,6 +20,22 @@ const userSchema = new mongoose.Schema({
         ],
         unique: true
     },
-
+    password: {
+        type: String,
+        required: [true, 'input your name'],
+        minLength: 6,
+        // maxLength: 12,
+    },
 
 })
+// 1 is pr
+userSchema.pre("save", async function (next) {
+    const salt = await bccrypt.genSalt(10)
+    this.password = await bccrypt.hash(this.password, salt)
+    next()
+})
+// create instance method
+userSchema.methods.getName = function (){
+    return this.name
+}
+module.exports = mongoose.model('User', userSchema)
